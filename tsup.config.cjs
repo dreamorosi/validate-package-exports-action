@@ -6,7 +6,7 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   declaration: true,
-  format: ['cjs'],
-  target: 'node18',
+  format: ['esm'],
+  target: 'node20',
   treeshake: true,
 });

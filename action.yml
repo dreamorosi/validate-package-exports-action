@@ -1,13 +1,17 @@
-name: 'Template Action'
-description: An opinionated GitHub Action starter template
+name: 'Validate Package Exports'
+description: Validate the exports of package.json files to ensure they exist, have valid syntax, and can be imported/required
 inputs:
-  whoToGreet: # id of input
-    description: 'Who to greet'
+  inputFiles: # id of input
+    description: 'Path to the package.json file to validate, accepts path to a single file or a glob pattern'
     required: true
     default: 'World'
+  token:
+    description: 'GitHub token'
+    required: true
+    default: ${{ secrets.GITHUB_TOKEN }}
 outputs:
   fullGreeting:
     description: 'The full greeting'
 runs:
-  using: 'node18'
-  main: 'dist/index.cjs'
+  using: 'node20'
+  main: 'dist/index.js'

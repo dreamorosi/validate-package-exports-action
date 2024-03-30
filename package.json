@@ -1,7 +1,7 @@
 {
-  "name": "github-action-template",
+  "name": "validate-package-exports-action",
   "version": "0.0.1",
-  "description": "An opinionated GitHub Action starter template",
+  "description": "Validate the exports of package.json files to ensure they exist, have valid syntax, and can be imported/required",
   "scripts": {
     "init-environment": "husky",
     "build": "tsup",
@@ -13,7 +13,9 @@
     "github",
     "action",
     "pr",
-    "template"
+    "validate",
+    "package",
+    "exports"
   ],
   "author": {
     "name": "Andrea Amorosi",
@@ -39,6 +41,8 @@
   },
   "dependencies": {
     "@actions/core": "^1.10.1",
-    "@actions/github": "^6.0.0"
+    "@actions/github": "^6.0.0",
+    "execa": "^8.0.1",
+    "validate-package-exports": "^0.2.1"
   }
 }
