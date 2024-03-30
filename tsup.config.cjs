@@ -10,6 +10,6 @@ export default defineConfig({
   target: 'node20',
   treeshake: true,
   banner: {
-    "js": "import { createRequire } from 'module';const require = createRequire(import.meta.url);", 
+    js: "import { createRequire } from 'module';const require = createRequire(import.meta.url);", 
   }
 });

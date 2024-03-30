@@ -36,6 +36,10 @@ export async function validatePackageExports(
 		return null;
 	} catch (error) {
 		assertExecaError(error);
-		return JSON.parse(error.stdout);
+		try {
+			return JSON.parse(error.stdout);
+		} catch (error) {
+			throw new Error(`Failed to parse JSON: ${error}`, { cause: error });
+		}
 	}
 }
