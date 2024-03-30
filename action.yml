@@ -1,0 +1,13 @@
+name: 'Template Action'
+description: An opinionated GitHub Action starter template
+inputs:
+  whoToGreet: # id of input
+    description: 'Who to greet'
+    required: true
+    default: 'World'
+outputs:
+  fullGreeting:
+    description: 'The full greeting'
+runs:
+  using: 'node18'
+  main: 'dist/index.cjs'
