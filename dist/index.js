@@ -1,3 +1,4 @@
+import { createRequire } from 'module';
 import crypto from 'crypto';
 import { readFileSync, createWriteStream, createReadStream } from 'node:fs';
 import { Buffer as Buffer$1 } from 'node:buffer';
@@ -9,6 +10,7 @@ import os, { constants } from 'node:os';
 import { setTimeout as setTimeout$1 } from 'node:timers/promises';
 import { debuglog } from 'node:util';
 
+const require = createRequire(import.meta.url);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
