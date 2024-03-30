@@ -22888,11 +22888,11 @@ var require_mode = __commonJS({
 var require_isexe = __commonJS({
   "node_modules/isexe/index.js"(exports, module) {
     __require("fs");
-    var core2;
+    var core3;
     if (process.platform === "win32" || global.TESTING_WINDOWS) {
-      core2 = require_windows();
+      core3 = require_windows();
     } else {
-      core2 = require_mode();
+      core3 = require_mode();
     }
     module.exports = isexe;
     isexe.sync = sync;
@@ -22915,7 +22915,7 @@ var require_isexe = __commonJS({
           });
         });
       }
-      core2(path3, options || {}, function(er, is) {
+      core3(path3, options || {}, function(er, is) {
         if (er) {
           if (er.code === "EACCES" || options && options.ignoreErrors) {
             er = null;
@@ -22927,7 +22927,7 @@ var require_isexe = __commonJS({
     }
     function sync(path3, options) {
       try {
-        return core2.sync(path3, options || {});
+        return core3.sync(path3, options || {});
       } catch (er) {
         if (options && options.ignoreErrors || er.code === "EACCES") {
           return false;
@@ -23339,7 +23339,7 @@ var require_merge_stream = __commonJS({
 });
 
 // src/index.ts
-var import_core2 = __toESM(require_core(), 1);
+var import_core3 = __toESM(require_core(), 1);
 var import_github = __toESM(require_github(), 1);
 
 // node_modules/execa/index.js
@@ -24748,6 +24748,7 @@ function execa(file, args, options) {
 }
 
 // src/validatePackageExports.ts
+var import_core2 = __toESM(require_core(), 1);
 function assertExecaError(error) {
   if (!(error instanceof Error) || !("stdout" in error && "stderr" in error && "exitCode" in error)) {
     throw error;
@@ -24765,9 +24766,11 @@ async function validatePackageExports(input) {
     return null;
   } catch (error) {
     assertExecaError(error);
+    const originalError = error;
     try {
       return JSON.parse(error.stdout);
     } catch (error2) {
+      import_core2.default.debug(JSON.stringify(originalError, null, 2));
       throw new Error(`Failed to parse JSON: ${error2}`, { cause: error2 });
     }
   }
@@ -24794,12 +24797,12 @@ var findLineNumber = (packageJsonContent, path3) => {
   return packageJsonLines.findIndex((line) => line.includes(currentObj)) + 1;
 };
 try {
-  const inputFiles = import_core2.default.getInput("inputFiles", {
+  const inputFiles = import_core3.default.getInput("inputFiles", {
     required: true,
     trimWhitespace: true
   });
-  import_core2.default.setOutput("fullGreeting", "hi");
-  const octo = import_github.default.getOctokit(import_core2.default.getInput("token", { required: true }));
+  import_core3.default.setOutput("fullGreeting", "hi");
+  const octo = import_github.default.getOctokit(import_core3.default.getInput("token", { required: true }));
   const res = await validatePackageExports(inputFiles);
   if (res === null) {
     octo.rest.checks.create({
@@ -24852,9 +24855,9 @@ try {
   });
 } catch (error) {
   if (error instanceof Error) {
-    import_core2.default.setFailed(error.message);
+    import_core3.default.setFailed(error.message);
   }
-  import_core2.default.setFailed("Unknown error");
+  import_core3.default.setFailed("Unknown error");
 }
 /*! Bundled license information:
 

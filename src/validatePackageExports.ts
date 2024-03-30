@@ -1,4 +1,5 @@
 import { execa, type ExecaError } from 'execa';
+import core from '@actions/core';
 
 function assertExecaError(error: unknown): asserts error is ExecaError {
 	if (
@@ -36,9 +37,11 @@ export async function validatePackageExports(
 		return null;
 	} catch (error) {
 		assertExecaError(error);
+		const originalError = error;
 		try {
 			return JSON.parse(error.stdout);
 		} catch (error) {
+			core.debug(JSON.stringify(originalError, null, 2));
 			throw new Error(`Failed to parse JSON: ${error}`, { cause: error });
 		}
 	}
