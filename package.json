@@ -1,6 +1,6 @@
 {
   "name": "validate-package-exports-action",
-  "version": "0.0.1",
+  "version": "0.0.9",
   "description": "Validate the exports of package.json files to ensure they exist, have valid syntax, and can be imported/required",
   "scripts": {
     "init-environment": "husky",

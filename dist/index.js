@@ -20692,10 +20692,10 @@ async function validatePackageExports(input) {
   } catch (error) {
     assertExecaError(error);
     const originalError = error;
+    import_core2.default.debug(JSON.stringify(originalError, null, 2));
     try {
       return JSON.parse(error.stdout);
     } catch (error2) {
-      import_core2.default.debug(JSON.stringify(originalError, null, 2));
       throw new Error(`Failed to parse JSON: ${error2}`, { cause: error2 });
     }
   }

@@ -38,10 +38,10 @@ export async function validatePackageExports(
 	} catch (error) {
 		assertExecaError(error);
 		const originalError = error;
+		core.debug(JSON.stringify(originalError, null, 2));
 		try {
 			return JSON.parse(error.stdout);
 		} catch (error) {
-			core.debug(JSON.stringify(originalError, null, 2));
 			throw new Error(`Failed to parse JSON: ${error}`, { cause: error });
 		}
 	}
