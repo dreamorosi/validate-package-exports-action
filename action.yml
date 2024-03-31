@@ -4,9 +4,6 @@ inputs:
   inputFiles: # id of input
     description: 'Path to the package.json file to validate, accepts path to a single file or a glob pattern'
     required: true
-outputs:
-  fullGreeting:
-    description: 'The full greeting'
 runs:
   using: 'node20'
   main: 'dist/index.js'

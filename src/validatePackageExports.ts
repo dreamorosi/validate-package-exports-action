@@ -31,6 +31,7 @@ export async function validatePackageExports(
 			'--check',
 			'--verify',
 			'--json',
+			'--no-bail',
 			input,
 		]);
 

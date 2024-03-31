@@ -36,11 +36,6 @@ try {
 		required: true,
 		trimWhitespace: true,
 	});
-	/* core.info(fullGreeting); */
-	core.setOutput('fullGreeting', 'hi');
-
-	// Get the JSON webhook payload for the event that triggered the workflow
-	// const payload = JSON.stringify(github.context.payload, undefined, 2);
 
 	const res = await validatePackageExports(inputFiles);
 
@@ -74,7 +69,7 @@ try {
 		});
 	}
 
-	process.exit(1);
+	core.setFailed(`Found ${res.length} errors in exports`);
 } catch (error) {
 	if (error instanceof Error) {
 		core.setFailed(error.message);

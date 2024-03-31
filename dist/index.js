@@ -20686,6 +20686,7 @@ async function validatePackageExports(input) {
       "--check",
       "--verify",
       "--json",
+      "--no-bail",
       input
     ]);
     return null;
@@ -20726,7 +20727,6 @@ try {
     required: true,
     trimWhitespace: true
   });
-  import_core3.default.setOutput("fullGreeting", "hi");
   const res = await validatePackageExports(inputFiles);
   if (res === null) {
     import_core3.default.info("No errors found");
@@ -20753,7 +20753,7 @@ try {
       startLine: lineNumber
     });
   }
-  process.exit(1);
+  import_core3.default.setFailed(`Found ${res.length} errors in exports`);
 } catch (error) {
   if (error instanceof Error) {
     import_core3.default.setFailed(error.message);
