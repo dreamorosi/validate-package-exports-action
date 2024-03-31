@@ -48,7 +48,7 @@ try {
 	const packageJsonContents = new Map<string, string>();
 	for (const error of res) {
 		const {
-			entryPoint: { packagePath, itemPath, subpath },
+			entryPoint: { packagePath, itemPath, subpath, condition },
 			message,
 			name,
 		} = error;
@@ -63,7 +63,7 @@ try {
 			itemPath
 		);
 
-		core.error(`${name}: ${message} in ${subpath}`, {
+		core.error(`${name}: ${message} in ${subpath} "${condition}" export`, {
 			file: packagePath,
 			startLine: lineNumber,
 		});

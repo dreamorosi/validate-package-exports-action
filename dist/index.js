@@ -20736,7 +20736,7 @@ try {
   const packageJsonContents = /* @__PURE__ */ new Map();
   for (const error of res) {
     const {
-      entryPoint: { packagePath, itemPath, subpath },
+      entryPoint: { packagePath, itemPath, subpath, condition },
       message,
       name
     } = error;
@@ -20748,7 +20748,7 @@ try {
       packageJsonContents.get(packagePath),
       itemPath
     );
-    import_core3.default.error(`${name}: ${message} in ${subpath}`, {
+    import_core3.default.error(`${name}: ${message} in ${subpath} "${condition}" export`, {
       file: packagePath,
       startLine: lineNumber
     });
