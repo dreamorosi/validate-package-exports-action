@@ -1,5 +1,4 @@
 import core from '@actions/core';
-import github from '@actions/github';
 import { readFileSync } from 'node:fs';
 import { validatePackageExports } from './validatePackageExports.js';
 
@@ -42,20 +41,11 @@ try {
 
 	// Get the JSON webhook payload for the event that triggered the workflow
 	// const payload = JSON.stringify(github.context.payload, undefined, 2);
-	const octo = github.getOctokit(core.getInput('token', { required: true }));
 
 	const res = await validatePackageExports(inputFiles);
 
 	if (res === null) {
-		octo.rest.checks.create({
-			owner: github.context.repo.owner,
-			repo: github.context.repo.repo,
-			name: 'My Check',
-			head_sha: github.context.sha,
-			status: 'completed',
-			conclusion: 'success',
-		});
-
+		core.info('No errors found');
 		process.exit(0);
 	}
 
@@ -78,29 +68,15 @@ try {
 			itemPath
 		);
 
-		errors.push({
-			path: packagePath,
-			start_line: lineNumber,
-			end_line: lineNumber,
-			annotation_level: 'failure',
-			message: `${name}: ${message} in ${subpath}`,
+		core.error(`${name}: ${message} in ${subpath}`, {
+			file: packagePath,
+			startLine: lineNumber,
 		});
 	}
 
-	octo.rest.checks.create({
-		owner: github.context.repo.owner,
-		repo: github.context.repo.repo,
-		name: 'My Check',
-		head_sha: github.context.sha,
-		status: 'completed',
-		conclusion: 'failure',
-		output: {
-			title: 'Error',
-			summary: 'An error occurred',
-			// @ts-expect-error
-			annotations: errors,
-		},
-	});
+	if (errors.length > 0) {
+		process.exit(1);
+	}
 } catch (error) {
 	if (error instanceof Error) {
 		core.setFailed(error.message);
