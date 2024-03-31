@@ -20732,8 +20732,8 @@ try {
     import_core3.default.info("No errors found");
     process.exit(0);
   }
+  import_core3.default.info(`Found ${res.length} errors`);
   const packageJsonContents = /* @__PURE__ */ new Map();
-  const errors = [];
   for (const error of res) {
     const {
       entryPoint: { packagePath, itemPath, subpath },
@@ -20753,9 +20753,7 @@ try {
       startLine: lineNumber
     });
   }
-  if (errors.length > 0) {
-    process.exit(1);
-  }
+  process.exit(1);
 } catch (error) {
   if (error instanceof Error) {
     import_core3.default.setFailed(error.message);

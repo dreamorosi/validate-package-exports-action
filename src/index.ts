@@ -48,9 +48,9 @@ try {
 		core.info('No errors found');
 		process.exit(0);
 	}
+	core.info(`Found ${res.length} errors`);
 
 	const packageJsonContents = new Map<string, string>();
-	const errors = [];
 	for (const error of res) {
 		const {
 			entryPoint: { packagePath, itemPath, subpath },
@@ -74,9 +74,7 @@ try {
 		});
 	}
 
-	if (errors.length > 0) {
-		process.exit(1);
-	}
+	process.exit(1);
 } catch (error) {
 	if (error instanceof Error) {
 		core.setFailed(error.message);
